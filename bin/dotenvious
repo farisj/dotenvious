@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require "dotenvious"
+Dotenvious::CLI.new.run
