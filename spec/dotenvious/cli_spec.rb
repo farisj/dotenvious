@@ -15,11 +15,23 @@ describe Dotenvious::CLI do
     end
 
     context 'when there are ENV vars missing' do
-      it 'aborts' do
-        expect_any_instance_of(described_class).to receive(:all_vars_present?).and_return false
+      context 'and the user wants to append them' do
+        it 'begins the EnvAppender' do
+          io_object = double
+          expect(STDIN).to receive(:gets).and_return('y')
+          expect_any_instance_of(described_class).to receive(:all_vars_present?).and_return false
+          expect(Dotenvious::EnvAppender).to receive(:run)#.and_return false
+          described_class.new.run
+        end
+      end
+      context 'but the user does not care' do
+        it 'quits' do
+          expect(STDIN).to receive(:gets).and_return('n')
+          expect_any_instance_of(described_class).to receive(:all_vars_present?).and_return false
+          expect(Dotenvious::EnvAppender).not_to receive(:run)#.and_return false
 
-        #todo: suppress this output when running the spec
-        expect { described_class.new.run }.to raise_error SystemExit
+          described_class.new.run
+        end
       end
     end
 
