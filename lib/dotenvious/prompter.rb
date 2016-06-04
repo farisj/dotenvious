@@ -1,6 +1,7 @@
 require_relative 'value_replacer'
 require_relative 'mismatched_variable_finder'
 require_relative 'prompter'
+require_relative 'env_appender'
 
 module Dotenvious
   class Prompter
@@ -11,7 +12,7 @@ module Dotenvious
         next unless decision.downcase == 'y'
 
         if status == 'missing'
-          env.write(env_entry(key) + "\n")
+          EnvAppender.new.append(key)
         elsif status == 'mismatched'
           ValueReplacer.new.replace(key)
         end
@@ -44,7 +45,7 @@ module Dotenvious
     end
 
     def self.display_missing_output(var)
-      puts env_entry(var)
+      puts "#{var}=#{ENV_EXAMPLE[var]}"
       puts "Add to .env? [y/n/q]"
     end
 
@@ -52,14 +53,6 @@ module Dotenvious
       puts "ENV[#{var}] is set to: #{ENV[var]}"
       puts "Example [#{var}] is set to: #{ENV_EXAMPLE[var]}"
       puts "Replace with the example value? [y/n/q]"
-    end
-
-    def self.env_entry(var)
-      "#{var}=#{ENV_EXAMPLE[var]}"
-    end
-
-    def self.env
-      File.open('.env', 'a+')
     end
   end
 end
