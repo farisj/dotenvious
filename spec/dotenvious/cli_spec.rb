@@ -49,9 +49,6 @@ describe Dotenvious::CLI do
   end
 
   describe '#all_vars_present?' do
-    before do
-      expect(STDIN).to receive(:gets).at_least(:once).and_return('n')
-    end
     it 'delegates to MissingVariableFinder' do
       expect(Dotenvious::MissingVariableFinder).to receive(:all_vars_present?).and_return true
 
