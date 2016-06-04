@@ -3,12 +3,12 @@ require 'spec_helper'
 describe Dotenvious::EnvAppender do
   describe '.run' do
     before(:each) do
-      stub_const('Dotenvious::ENV', {} )
-      stub_const('Dotenvious::ENV_EXAMPLE', {} )
-      expect(Dotenvious::ENV).to receive(:keys).and_return(['test'])
-      expect(Dotenvious::ENV_EXAMPLE).to receive(:keys).and_return(['test', 'test2', 'test3'])
+      stub_const('Dotenvious::ENV', { 'test' => nil } )
+      stub_const('Dotenvious::ENV_EXAMPLE', {'test' => nil, 'test2' => nil, 'test3' => nil} )
+      # expect(Dotenvious::ENV).to receive(:keys).and_return(['test'])
+      # expect(Dotenvious::ENV_EXAMPLE).to receive(:keys).and_return(['test', 'test2', 'test3'])
     end
-    it 'prompts the user to add every missing variable do' do
+    it 'prompts the user to add every missing or mismatched variable do' do
       expect(STDIN).to receive(:gets).twice.and_return('n')
 
       described_class.run

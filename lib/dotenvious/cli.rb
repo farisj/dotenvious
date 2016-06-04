@@ -11,7 +11,7 @@ module Dotenvious
 
     def run
       Loader.new(filename).load_envs
-      unless all_vars_present?
+      unless all_vars_present? && all_vars_match?
         alert_user
         decision = STDIN.gets.strip
         EnvAppender.run if decision.downcase == 'y'
@@ -28,6 +28,10 @@ module Dotenvious
 
     def all_vars_present?
       MissingVariableFinder.all_vars_present?
+    end
+
+    def all_vars_match?
+      !MismatchedVariableFinder.mismatched_vars?
     end
 
     def abort
