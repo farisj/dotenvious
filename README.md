@@ -12,7 +12,7 @@ If you're working on one team within a larger application, environment variables
 
 Dotenvious solves this problem. See that your most recent pull breaks Rails on startup? Run dotenvious and it will present to you the new variables that were added - and give you the option to immediately add them to your `.env` file.
 
-Dotenvious eliminates the pain of manually parsing through a newly changed `.example-env` file to see which new breaking variables have been added. 
+Dotenvious eliminates the pain of manually parsing through a newly changed `.example-env` file to see which new breaking variables have been added.
 
 ## Getting Started
 
@@ -28,12 +28,12 @@ Currently, this gem relies on [Dotenv](https://github.com/bkeepers/dotenv) to lo
 
 [ ] Figure out how to incorporate in rakefile
 
-[ ] Compare keys already present in both files but with different values
+[x] Compare keys already present in both files but with different values
 
 [ ] Ability to choose which development `.env-*` file to load from
 
-[ ] Perist user's individual choices in a `.dotenvious` file in directory
+[ ] Persist user's individual choices in a `.dotenvious` file in directory
 
-[ ] Option to always run on boot after pull from master
+[ ] Option to always run on boot after recent pull from master
 
-[ ] More things are always on the horizon! 
+[ ] More things are always on the horizon!
