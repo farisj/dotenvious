@@ -36,11 +36,7 @@ module Dotenvious
     end
 
     def self.prompt(var, status)
-      if status == 'missing'
-        display_missing_output(var)
-      elsif status == 'mismatched'
-        display_mismatch_output(var)
-      end
+      send(:"display_#{status}_output", var)
       STDIN.gets.strip
     end
 
