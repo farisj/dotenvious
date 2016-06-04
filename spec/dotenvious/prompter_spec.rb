@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dotenvious::EnvAppender do
+describe Dotenvious::Prompter do
   describe '.run' do
     before(:each) do
       stub_const('Dotenvious::ENV', { 'test' => nil } )

@@ -16,11 +16,11 @@ describe Dotenvious::CLI do
 
     context 'when there are ENV vars missing' do
       context 'and the user wants to append them' do
-        it 'begins the EnvAppender' do
+        it 'begins the Prompter' do
           io_object = double
           expect(STDIN).to receive(:gets).and_return('y')
           expect_any_instance_of(described_class).to receive(:all_vars_present?).and_return false
-          expect(Dotenvious::EnvAppender).to receive(:run)#.and_return false
+          expect(Dotenvious::Prompter).to receive(:run)#.and_return false
           described_class.new.run
         end
       end
@@ -28,7 +28,7 @@ describe Dotenvious::CLI do
         it 'quits' do
           expect(STDIN).to receive(:gets).and_return('n')
           expect_any_instance_of(described_class).to receive(:all_vars_present?).and_return false
-          expect(Dotenvious::EnvAppender).not_to receive(:run)#.and_return false
+          expect(Dotenvious::Prompter).not_to receive(:run)#.and_return false
 
           described_class.new.run
         end

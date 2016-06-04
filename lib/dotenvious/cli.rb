@@ -1,7 +1,7 @@
 require_relative 'loader'
 require_relative 'missing_variable_finder'
-require_relative 'env_appender'
-
+require_relative 'prompter'
+require 'pry'
 module Dotenvious
   class CLI
     def initialize
@@ -11,10 +11,11 @@ module Dotenvious
 
     def run
       Loader.new(filename).load_envs
+      # binding.pry
       unless all_vars_present? && all_vars_match?
         alert_user
         decision = STDIN.gets.strip
-        EnvAppender.run if decision.downcase == 'y'
+        Prompter.run if decision.downcase == 'y'
       end
     end
 

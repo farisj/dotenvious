@@ -2,7 +2,7 @@ require_relative 'value_replacer'
 require_relative 'mismatched_variable_finder'
 
 module Dotenvious
-  class EnvAppender
+  class Prompter
     def self.run
       keys_in_question.each do |key, status|
         case status
