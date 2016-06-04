@@ -27,8 +27,13 @@ Currently, this gem relies on [Dotenv](https://github.com/bkeepers/dotenv) to lo
 ## Future Work
 
 [ ] Figure out how to incorporate in rakefile
+
 [ ] Compare keys already present in both files but with different values
+
 [ ] Ability to choose which development `.env-*` file to load from
+
 [ ] Perist user's individual choices in a `.dotenvious` file in directory
+
 [ ] Option to always run on boot after pull from master
+
 [ ] More things are always on the horizon! 
