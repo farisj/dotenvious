@@ -11,8 +11,8 @@ module Dotenvious
     end
 
     def run
+      ConfigurationLoader.new.load
       EnvLoader.new(filename).load_envs
-      # binding.pry
       unless all_vars_present? && all_vars_match?
         alert_user
         decision = STDIN.gets.strip
@@ -29,7 +29,7 @@ module Dotenvious
     end
 
     def all_vars_present?
-      MissingVariableFinder.all_vars_present?
+      !MissingVariableFinder.required_vars_missing?
     end
 
     def all_vars_match?

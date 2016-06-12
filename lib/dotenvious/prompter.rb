@@ -28,7 +28,7 @@ module Dotenvious
     end
 
     def self.missing_vars
-      ENV_EXAMPLE.keys - ENV.keys
+      MissingVariableFinder.missing_required_vars
     end
 
     def self.mismatched_vars

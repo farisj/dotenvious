@@ -5,8 +5,17 @@ module Dotenvious
     end
 
     def self.mismatched_vars
-      ENV.keys.select do |key|
+      keys.select do |key|
         ENV_EXAMPLE.has_key?(key) && ENV_EXAMPLE[key] != ENV[key]
+      end
+    end
+
+    private
+
+    def self.keys
+      return ENV.keys if CONFIG[:ignored_vars].nil?
+      ENV.keys.reject do |key|
+        CONFIG[:ignored_vars].include?(key)
       end
     end
   end

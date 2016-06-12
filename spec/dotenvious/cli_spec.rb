@@ -35,9 +35,6 @@ describe Dotenvious::CLI do
       end
     end
 
-    context 'when there are ENV vars mismatched' do
-    end
-
     context 'when there are no ENV vars missing or mismatched' do
       it 'does nothing' do
         expect_any_instance_of(described_class).to receive(:all_vars_present?).and_return true
@@ -45,26 +42,6 @@ describe Dotenvious::CLI do
 
         expect { described_class.new.run }.to_not raise_error
       end
-    end
-  end
-
-  describe '#all_vars_present?' do
-    it 'delegates to MissingVariableFinder' do
-      expect(Dotenvious::MissingVariableFinder).to receive(:all_vars_present?).and_return true
-
-      described_class.new.run
-    end
-  end
-
-  describe '#all_vars_match?' do
-    before do
-      expect(STDIN).to receive(:gets).at_least(:once).and_return('n')
-      allow(Dotenvious::MissingVariableFinder).to receive(:all_vars_present?).and_return true
-    end
-    it 'delegates to MismatchedVariableFinder' do
-      expect(Dotenvious::MismatchedVariableFinder).to receive(:mismatched_vars?).and_return true
-
-      described_class.new.run
     end
   end
 end
