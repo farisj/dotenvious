@@ -45,7 +45,7 @@ module Dotenvious
       puts "Add to .env? [y/n/q]"
     end
 
-    def self.display_mismatch_output(var)
+    def self.display_mismatched_output(var)
       puts "ENV[#{var}] is set to: #{ENV[var]}"
       puts "Example [#{var}] is set to: #{ENV_EXAMPLE[var]}"
       puts "Replace with the example value? [y/n/q]"
