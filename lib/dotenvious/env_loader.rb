@@ -2,7 +2,7 @@ require_relative 'example_loader'
 require 'dotenv'
 
 module Dotenvious
-  class Loader
+  class EnvLoader
 
     def initialize(filename)
       @filename = filename

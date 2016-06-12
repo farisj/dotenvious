@@ -1,4 +1,4 @@
-require_relative 'loader'
+require_relative 'env_loader'
 require_relative 'missing_variable_finder'
 require_relative 'prompter'
 require 'pry'
@@ -10,7 +10,7 @@ module Dotenvious
     end
 
     def run
-      Loader.new(filename).load_envs
+      EnvLoader.new(filename).load_envs
       # binding.pry
       unless all_vars_present? && all_vars_match?
         alert_user

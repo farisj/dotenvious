@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dotenvious::Loader do
+describe Dotenvious::EnvLoader do
   describe '#initialize' do
     it 'takes 1 argument' do
       expect { described_class.new('test') }.to_not raise_error
