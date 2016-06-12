@@ -1,5 +1,6 @@
 module Dotenvious
   ENV_EXAMPLE = {}
+  CONFIG = {}
 end
 
 require 'dotenv'

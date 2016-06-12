@@ -1,6 +1,7 @@
 require_relative 'env_loader'
 require_relative 'missing_variable_finder'
 require_relative 'prompter'
+require_relative 'configuration_loader'
 require 'pry'
 module Dotenvious
   class CLI
