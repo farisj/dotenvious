@@ -52,31 +52,31 @@ describe Dotenvious::Configuration do
     end
   end
 
-  describe '#optional_vars=' do
-    it 'sets :optional_vars in CONFIG' do
+  describe '#optional_variables=' do
+    it 'sets :optional_variables in CONFIG' do
       described_class.new do |config|
-        config.optional_vars = %w(TEST VARS)
+        config.optional_variables = %w(TEST VARS)
       end
 
-      expect(Dotenvious::CONFIG[:optional_vars]).to eq ['TEST', 'VARS']
+      expect(Dotenvious::CONFIG[:optional_variables]).to eq ['TEST', 'VARS']
     end
 
     it 'only accepts an array of all caps strings' do
       expect do
         described_class.new do |config|
-          config.optional_vars = 'idk'
+          config.optional_variables = 'idk'
         end
       end.to raise_error Dotenvious::Configuration::ConfigurationError
 
       expect do
         described_class.new do |config|
-          config.optional_vars = [:symbol]
+          config.optional_variables = [:symbol]
         end
       end.to raise_error Dotenvious::Configuration::ConfigurationError
 
       expect do
         described_class.new do |config|
-          config.optional_vars = ['lower', 'case']
+          config.optional_variables = ['lower', 'case']
         end
       end.to raise_error Dotenvious::Configuration::ConfigurationError
     end

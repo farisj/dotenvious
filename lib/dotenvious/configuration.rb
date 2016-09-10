@@ -18,9 +18,9 @@ module Dotenvious
       CONFIG[:custom_variables] = vars
     end
 
-    def optional_vars=(vars)
+    def optional_variables=(vars)
       raise ConfigurationError unless all_caps_array?(vars)
-      CONFIG[:optional_vars] = vars
+      CONFIG[:optional_variables] = vars
     end
 
     private

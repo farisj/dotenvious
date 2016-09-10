@@ -8,7 +8,7 @@ describe Dotenvious::MissingVariableFinder do
     end
     context 'with custom configuration' do
       before do
-        stub_const('Dotenvious::CONFIG', { optional_vars: ['TEST_3'] } )
+        stub_const('Dotenvious::CONFIG', { optional_variables: ['TEST_3'] } )
       end
 
       it 'ignores vars specified in CONFIG[:custom_variables]' do

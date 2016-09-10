@@ -14,9 +14,9 @@ module Dotenvious
 
     def self.keys
       all_keys = Dotenvious::ENV_EXAMPLE.keys
-      return all_keys if CONFIG[:optional_vars].nil?
+      return all_keys if CONFIG[:optional_variables].nil?
       all_keys.reject do |key|
-        CONFIG[:optional_vars].include?(key)
+        CONFIG[:optional_variables].include?(key)
       end
     end
   end
