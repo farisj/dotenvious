@@ -1,4 +1,4 @@
-require_relative 'loaders/env'
+require_relative 'loaders/environments'
 require_relative 'missing_variable_finder'
 require_relative 'prompter'
 require_relative 'loaders/configuration'
@@ -12,7 +12,7 @@ module Dotenvious
 
     def run
       Loaders::Configuration.new.load
-      Loaders::Env.new(filename).load_envs
+      Loaders::Environments.new(filename).load_envs
       unless all_vars_present? && all_vars_match?
         alert_user
         decision = STDIN.gets.strip

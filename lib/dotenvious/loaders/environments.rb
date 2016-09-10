@@ -3,7 +3,7 @@ require 'dotenv'
 
 module Dotenvious
   module Loaders
-    class Env
+    class Environments
 
       def initialize(filename)
         @filename = filename

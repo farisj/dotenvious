@@ -9,7 +9,7 @@ describe Dotenvious::CLI do
 
   describe '#run' do
     it 'loads the environment & example environment variables' do
-      expect_any_instance_of(Dotenvious::Loaders::Env).to receive(:load_envs)
+      expect_any_instance_of(Dotenvious::Loaders::Environments).to receive(:load_envs)
 
       described_class.new.run
     end
