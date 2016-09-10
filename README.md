@@ -1,41 +1,61 @@
 # Dotenvious
 
-A gem to manage .env dependencies.
+A gem to manage `.env` dependencies.
 
 Your `.env` file gets jealous when `.example-env` has keys that it does not. Dotenvious helps `.env` get back on the right track.
 
-This gem exists to solve the following workflow:
-
-Imagine you're working at a small to mid-size team in a startup whose architecture is constantly evolving. In a fast-moving startup, environment variable may change rapidly.
-
-If you're working on one team within a larger application, environment variables may be added to your codebase that you might know were added, some of which may break the application's code after pulling from your updated repository.
-
-Dotenvious solves this problem. See that your most recent pull breaks Rails on startup? Run dotenvious and it will present to you the new variables that were added - and give you the option to immediately add them to your `.env` file.
+See that your most recent pull breaks Rails on startup due to missing environment variables? Run `bundle exec dotenvious` and it will present to you the new variables that were added - and give you the option to immediately add them to your `.env` file.
 
 Dotenvious eliminates the pain of manually parsing through a newly changed `.example-env` file to see which new breaking variables have been added.
 
 ## Getting Started
 
-???
+Add the gem to your Gemfile by the following:
 
-## What You Need
+```
+ group :development do
+	gem 'dotenvious'
+end
 
-This gem compares the variables set in your `.env` file with what exists in `.example-env`. The gem includes a CLI which walks you through the variables missing in `.env` but present in `.example-env`.
+```
 
-Currently, this gem relies on [Dotenv](https://github.com/bkeepers/dotenv) to load dependencies from ENV.
+then run:
 
+```
+bundle install
+bundle exec dotenvious
+```
+
+The CLI will then take you through your `.env` and `.example-env` files, prompting you to add missing variables or overwrite differing variables.
+
+
+## Customization
+
+Currently, one can whitelist which variables they want to exclude from examination.
+
+First, add a `.envious` file to the root of your project. In the file, you can specify which variables to ignore fully (`optional_variables`) or those that you need but are expected to have different values from those provided in `.example-env` (`custom_variables`).
+
+```
+Dotenvious::Configuration.new do |config|
+
+	config.custom_variables = %w(VARIABLES WITH DIFFERENT VALUES)
+	
+	config.optional_variables = %w(VARIABLES YOU DONT NEED)
+
+end
+
+``` 
+
+These both need to be arrays.
+
+`dotenvious` will ignore the variables specified.
 ## Future Work
 
-- [ ] Figure out how to incorporate in rakefile
-
-- [x] Compare keys already present in both files but with different values
 
 - [ ] Ability to choose which development `.env-*` file to load from
 
-- [ ] Persist user's individual choices in a `.dotenvious` file in directory
-
-- [ ] Option to always run on boot after recent pull from master
+- [ ] Persist user's individual choices in a `.envious` file in directory after run
 
 - [ ] Auto create `.envious` with user specified options if not exists
 
-- [ ] More things are always on the horizon!
+- [ ] Remove duplicate variables if declared twice in `.env` file
