@@ -1,5 +1,5 @@
 require_relative 'example'
-require 'dotenv'
+require_relative 'env'
 
 module Dotenvious
   module Loaders
@@ -10,7 +10,7 @@ module Dotenvious
       end
 
       def load_envs
-        Dotenv.load
+        Env.new('.env').load
         Example.new(filename).load
       end
 
