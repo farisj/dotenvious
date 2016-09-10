@@ -22,31 +22,31 @@ describe Dotenvious::Configuration do
     end
   end
 
-  describe '#ignored_vars=' do
-    it 'sets :ignored_vars in CONFIG' do
+  describe '#custom_variables=' do
+    it 'sets :custom_variables in CONFIG' do
       described_class.new do |config|
-        config.ignored_vars = %w(TEST VARS)
+        config.custom_variables = %w(TEST VARS)
       end
 
-      expect(Dotenvious::CONFIG[:ignored_vars]).to eq ['TEST', 'VARS']
+      expect(Dotenvious::CONFIG[:custom_variables]).to eq ['TEST', 'VARS']
     end
 
     it 'only accepts an array of all caps strings' do
       expect do
         described_class.new do |config|
-          config.ignored_vars = 'idk'
+          config.custom_variables = 'idk'
         end
       end.to raise_error Dotenvious::Configuration::ConfigurationError
 
       expect do
         described_class.new do |config|
-          config.ignored_vars = [:symbol]
+          config.custom_variables = [:symbol]
         end
       end.to raise_error Dotenvious::Configuration::ConfigurationError
 
       expect do
         described_class.new do |config|
-          config.ignored_vars = ['lower', 'case']
+          config.custom_variables = ['lower', 'case']
         end
       end.to raise_error Dotenvious::Configuration::ConfigurationError
     end

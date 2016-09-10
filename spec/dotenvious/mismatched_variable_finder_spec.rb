@@ -16,10 +16,10 @@ describe Dotenvious::MismatchedVariableFinder do
       before do
         stub_const('Dotenvious::ENV', {'TEST' => 'same', 'TEST_2' => 'some_value'} )
         stub_const('Dotenvious::ENV_EXAMPLE', {'TEST' => 'different', 'TEST_2' => 'different_value'} )
-        stub_const('Dotenvious::CONFIG', { ignored_vars: ['TEST'] } )
+        stub_const('Dotenvious::CONFIG', { custom_variables: ['TEST'] } )
       end
 
-      it 'ignores vars specified in CONFIG[:ignored_vars]' do
+      it 'ignores vars specified in CONFIG[:custom_variables]' do
         expect(described_class.mismatched_vars).to match_array(['TEST_2'])
       end
     end

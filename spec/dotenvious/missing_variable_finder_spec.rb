@@ -11,7 +11,7 @@ describe Dotenvious::MissingVariableFinder do
         stub_const('Dotenvious::CONFIG', { optional_vars: ['TEST_3'] } )
       end
 
-      it 'ignores vars specified in CONFIG[:ignored_vars]' do
+      it 'ignores vars specified in CONFIG[:custom_variables]' do
         expect(described_class.missing_required_vars).to match_array(['TEST_2'])
       end
     end

@@ -13,9 +13,9 @@ module Dotenvious
       CONFIG[:example_file] = filename
     end
 
-    def ignored_vars=(vars)
+    def custom_variables=(vars)
       raise ConfigurationError unless all_caps_array?(vars)
-      CONFIG[:ignored_vars] = vars
+      CONFIG[:custom_variables] = vars
     end
 
     def optional_vars=(vars)

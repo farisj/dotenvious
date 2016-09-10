@@ -13,9 +13,9 @@ module Dotenvious
     private
 
     def self.keys
-      return ENV.keys if CONFIG[:ignored_vars].nil?
+      return ENV.keys if CONFIG[:custom_variables].nil?
       ENV.keys.reject do |key|
-        CONFIG[:ignored_vars].include?(key)
+        CONFIG[:custom_variables].include?(key)
       end
     end
   end
