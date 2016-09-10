@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dotenvious::ExampleLoader do
+describe Dotenvious::Loaders::Example do
   describe '.new' do
     it 'takes one argument' do
       expect{ described_class.new('test') }.to_not raise_error
@@ -16,7 +16,7 @@ describe Dotenvious::ExampleLoader do
 
     it 'passes those arguments to Dotenvious::ENV_EXAMPLE' do
       expect(File).to receive(:read).and_return "TEST=123\nEXAMPLE=234"
-      
+
       described_class.new('test').load
 
       expect(Dotenvious::ENV_EXAMPLE['TEST']).to eq '123'

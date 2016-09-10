@@ -1,7 +1,7 @@
-require_relative 'env_loader'
+require_relative 'loaders/env'
 require_relative 'missing_variable_finder'
 require_relative 'prompter'
-require_relative 'configuration_loader'
+require_relative 'loaders/configuration'
 require 'pry'
 module Dotenvious
   class CLI
@@ -11,8 +11,8 @@ module Dotenvious
     end
 
     def run
-      ConfigurationLoader.new.load
-      EnvLoader.new(filename).load_envs
+      Loaders::Configuration.new.load
+      Loaders::Env.new(filename).load_envs
       unless all_vars_present? && all_vars_match?
         alert_user
         decision = STDIN.gets.strip

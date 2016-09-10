@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dotenvious::ConfigurationLoader do
+describe Dotenvious::Loaders::Configuration do
   describe '#load' do
     let(:filepath) { Dir.pwd + '/.envious' }
     context 'when ./.envious is present' do
