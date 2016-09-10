@@ -2,3 +2,4 @@
 .env
 .example-env
 .envious
+dotenvious-*.gem
