@@ -1,24 +1,13 @@
+require_relative 'environment'
+
 module Dotenvious
   module Loaders
-    class Example
-      def initialize(filename)
-        @filename = filename
-      end
-
-      def load
-        #took from Dotenv source code whoops
-        file.each do |line|
-          Dotenvious::ENV_EXAMPLE[$1] = $2 if line =~ /\A([\w_]+)=(.*)\z/
-        end
-      end
-
+    class Example < Environment
       private
 
-      def file
-        File.read(@filename).split("\n")
+      def environment
+        Dotenvious::ENV_EXAMPLE
       end
-
-      attr_reader :filename
     end
   end
 end
