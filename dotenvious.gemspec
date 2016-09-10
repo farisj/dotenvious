@@ -3,13 +3,12 @@ Gem::Specification.new do |s|
   s.version     = '0.0.1'
   s.date        = '2016-09-10'
   s.summary     = "Dotenvious"
-  s.description = "A dotenv wrapper to manage variables"
+  s.description = "A Gem to manage environment variables"
   s.authors     = ["Jake Faris"]
   s.email       = 'jakefaris@outlook.com'
   s.files       = `git ls-files`.split($/)
   s.executables = ['dotenvious']
-  s.homepage    =
-    'http://rubygems.org/gems/dotenvious'
+  s.homepage    = 'https://github.com/farisj/dotenvious'
   s.license       = 'MIT'
 
   s.add_development_dependency 'bundler', '~> 1.3'
