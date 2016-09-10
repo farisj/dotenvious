@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Jake Faris"]
   s.email       = 'jakefaris@outlook.com'
   s.files       = `git ls-files`.split($/)
+  s.executables = ['dotenvious']
   s.homepage    =
     'http://rubygems.org/gems/dotenvious'
   s.license       = 'MIT'
