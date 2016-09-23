@@ -8,6 +8,9 @@ describe Dotenvious::CLI do
   end
 
   describe '#run' do
+    before do
+      allow(File).to receive(:read).and_return("")
+    end
     it 'loads the environment & example environment variables' do
       expect_any_instance_of(Dotenvious::Loaders::Environments).to receive(:load_envs)
 
