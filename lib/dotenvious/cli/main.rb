@@ -6,15 +6,10 @@ require 'pry'
 module Dotenvious
   module CLI
     class Main
-      def initialize
-        #figure out which file - for now can just look .env.example or .example-env
-        @filename = '.example-env' # or .env-example
-      end
-
       def run
         if ARGV[0].to_s.empty?
           Loaders::Configuration.new.load
-          Loaders::Environments.new(filename).load_envs
+          Loaders::Environments.new.load_envs
           unless all_vars_present? && all_vars_match?
             alert_user
             decision = STDIN.gets.strip
@@ -26,8 +21,6 @@ module Dotenvious
       end
 
       private
-
-      attr_reader :filename
 
       def alert_user
         puts "You have missing ENV variables. Examime them? [y/n]"

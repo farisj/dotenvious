@@ -1,10 +1,6 @@
 module Dotenvious
   module Loaders
     class Environment
-      def initialize(filename)
-        @filename = filename
-      end
-
       def load
         #took from Dotenv source code whoops
         file.each do |line|
@@ -18,11 +14,13 @@ module Dotenvious
         raise "environment must be defined in child class"
       end
 
-      def file
-        File.read(@filename).split("\n")
+      def filename
+        raise "fileame must be defined in child class"
       end
 
-      attr_reader :filename
+      def file
+        File.read(filename).split("\n")
+      end
     end
   end
 end
