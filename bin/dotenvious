@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require "dotenvious"
-Dotenvious::CLI.new.run
+Dotenvious::CLI::Main.new.run

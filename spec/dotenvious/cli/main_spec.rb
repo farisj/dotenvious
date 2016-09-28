@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dotenvious::CLI do
+describe Dotenvious::CLI::Main do
   describe '.new' do
     xit 'determines the correct file to use as example' do
       # future release work

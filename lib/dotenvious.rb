@@ -4,4 +4,4 @@ module Dotenvious
   CONFIG = {}
 end
 
-require_relative 'dotenvious/cli'
+require_relative 'dotenvious/cli/main'
