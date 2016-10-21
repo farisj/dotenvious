@@ -1,11 +1,13 @@
 require_relative 'env_file_consolidator'
 require_relative 'env_file_sorter'
+require_relative 'envious_file_configuror'
 
 module Dotenvious
   module CLI
     class Main
       def run
         if ARGV[0].to_s.empty?
+          EnviousFileConfiguror.new.run
           EnvFileConsolidator.new.run
         elsif ARGV[0].to_s == '--sort'
           EnvFileSorter.new.run
