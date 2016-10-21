@@ -1,23 +1,13 @@
-require_relative '../loaders/environments'
-require_relative '../missing_variable_finder'
-require_relative '../prompter'
-require_relative '../loaders/configuration'
-require 'pry'
+require_relative 'env_file_consolidator'
+
 module Dotenvious
   module CLI
     class Main
-      def initialize
-        #figure out which file - for now can just look .env.example or .example-env
-        @filename = '.example-env' # or .env-example
-      end
-
       def run
-        Loaders::Configuration.new.load
-        Loaders::Environments.new(filename).load_envs
-        unless all_vars_present? && all_vars_match?
-          alert_user
-          decision = STDIN.gets.strip
-          Prompter.run if decision.downcase == 'y'
+        if ARGV[0].to_s.empty?
+          EnvFileConsolidator.new.run
+        else
+          ask_user_to_remove_flags
         end
       end
 
@@ -25,16 +15,8 @@ module Dotenvious
 
       attr_reader :filename
 
-      def alert_user
-        puts "You have missing ENV variables. Examime them? [y/n]"
-      end
-
-      def all_vars_present?
-        !MissingVariableFinder.required_vars_missing?
-      end
-
-      def all_vars_match?
-        !MismatchedVariableFinder.mismatched_vars?
+      def ask_user_to_remove_flags
+        puts "dotenvious does not have flags at this time. Run 'dotenvious' without flags to get the main functionality."
       end
 
       def abort

@@ -5,6 +5,10 @@ module Dotenvious
     class Example < Environment
       private
 
+      def filename
+        DEFAULT_EXAMPLE_ENV_FILE
+      end
+
       def environment
         Dotenvious::ENV_EXAMPLE
       end
