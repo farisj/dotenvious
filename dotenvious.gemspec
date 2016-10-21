@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'dotenvious'
-  s.version     = '0.0.2'
+  s.version     = '0.0.3'
   s.date        = '2016-10-21'
   s.summary     = "Dotenvious"
   s.description = "A Gem to manage environment variables"
