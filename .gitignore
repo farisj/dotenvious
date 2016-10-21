@@ -3,3 +3,4 @@
 .example-env
 .envious
 dotenvious-*.gem
+Gemfile.lock
