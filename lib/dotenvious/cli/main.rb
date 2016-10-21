@@ -18,11 +18,6 @@ module Dotenvious
       def ask_user_to_remove_flags
         puts "dotenvious does not have flags at this time. Run 'dotenvious' without flags to get the main functionality."
       end
-
-      def abort
-        abort_message = 'Hold up! Your .env file is green with envy towards .example-env. You should update it.'
-        super abort_message
-      end
     end
   end
 end
