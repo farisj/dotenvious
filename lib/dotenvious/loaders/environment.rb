@@ -1,3 +1,5 @@
+require_relative "../errors"
+
 module Dotenvious
   module Loaders
     class Environment
@@ -19,6 +21,9 @@ module Dotenvious
       end
 
       def file
+        if !File.exist?(filename)
+          raise Dotenvious::FileNotFoundError.new(filename)
+        end
         File.read(filename).split("\n")
       end
     end
