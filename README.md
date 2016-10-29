@@ -49,6 +49,11 @@ end
 These both need to be arrays.
 
 `dotenvious` will ignore the variables specified.
+
+### Sorting
+
+Running `dotenvious --sort` will sort your `.env` file alphabetically.
+
 ## Future Work
 
 
