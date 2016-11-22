@@ -5,6 +5,7 @@ describe Dotenvious::CLI::Main do
     context 'with no flags' do
       before do
         allow(File).to receive(:read).and_return("")
+        allow(STDIN).to receive(:gets).and_return('n')
       end
 
       it 'begins the EnvFileConsolidator' do
