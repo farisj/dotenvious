@@ -2,6 +2,7 @@ module Dotenvious
   module Loaders
     class Environment
       def load
+        return unless environment.keys.empty?
         #took from Dotenv source code whoops
         if file_missing?
           puts "This repo does not have an #{filename} file"
