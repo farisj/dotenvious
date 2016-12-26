@@ -15,14 +15,31 @@ describe Dotenvious::CLI::Main do
     end
 
     context 'when option flags are given' do
-      before do
-        stub_const('ARGV', ['--test'])
+      context 'and the flag is not implemented' do
+        before do
+          stub_const('ARGV', ['--test'])
+        end
+
+        it 'ignores the flag and runs main process' do
+          expect_any_instance_of(Dotenvious::CLI::EnvFileConsolidator).to receive(:run)
+
+          described_class.new.run
+        end
       end
 
-      it 'tells the user to try again without flags' do
-        expect_any_instance_of(described_class).to receive(:ask_user_to_remove_flags)
+      context 'and the flag is implemented' do
+        context '--sort' do
+          before do
+            stub_const('ARGV', ['--sort'])
+          end
 
-        described_class.new.run
+          it 'runs EnvFileSorter after main process' do
+            expect_any_instance_of(Dotenvious::CLI::EnvFileConsolidator).to receive(:run)
+            expect_any_instance_of(Dotenvious::CLI::EnvFileSorter).to receive(:run)
+
+            described_class.new.run
+          end
+        end
       end
     end
   end
