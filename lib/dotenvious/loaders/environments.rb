@@ -1,12 +1,11 @@
-require_relative 'example'
-require_relative 'env'
+require_relative 'dotenv_file'
 
 module Dotenvious
   module Loaders
     class Environments
       def load_envs
-        Env.new.load
-        Example.new.load
+        ENV.merge!(DotenvFile.load_from('.env'))
+        ENV_EXAMPLE.merge!(DotenvFile.load_from('.example-env'))
       end
     end
   end

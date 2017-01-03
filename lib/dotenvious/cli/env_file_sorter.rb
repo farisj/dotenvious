@@ -1,5 +1,3 @@
-require_relative '../loaders/env'
-
 module Dotenvious
   module CLI
     class EnvFileSorter
