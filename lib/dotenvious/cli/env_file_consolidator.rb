@@ -8,7 +8,7 @@ module Dotenvious
     class EnvFileConsolidator
       def run
         Loaders::Configuration.new.load
-        Loaders::Environments.new.load_envs
+        Loaders::Environments.new.load_environments
         unless all_vars_present? && all_vars_match?
           alert_user
           decision = STDIN.gets.strip
