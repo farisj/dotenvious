@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe Dotenvious::CLI::EnvFileConsolidator do
   describe '.new' do
-    xit 'determines the correct file to use as example' do
-      # future release work
+    it 'takes option hash' do
+      expect { described_class.new({example_file: '.envenvenv'}) }.to_not raise_error
     end
   end
 
   describe '#run' do
-    context 'with no flags' do
+    context 'without options' do
       before do
         allow(File).to receive(:read).and_return("")
       end
@@ -49,6 +49,17 @@ describe Dotenvious::CLI::EnvFileConsolidator do
 
           expect { described_class.new.run }.to_not raise_error
         end
+      end
+    end
+
+    context 'given an option hash with :example_file' do
+      it 'loads environments with that example_file' do
+        environments_double = double
+        expect(Dotenvious::Loaders::Environments).to receive(:new)
+          .with({example_file: '.test.env.test'}).and_return(environments_double)
+        expect(environments_double).to receive(:load_environments)
+
+        described_class.new({example_file: '.test.env.test'}).run
       end
     end
   end
