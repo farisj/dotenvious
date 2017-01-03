@@ -40,6 +40,22 @@ describe Dotenvious::CLI::Main do
             described_class.new.run
           end
         end
+
+        context '--file' do
+          before do
+            stub_const('ARGV', ['--file', '.my-test-file-env'])
+          end
+
+          it 'uses the user-specified filename to read example environment' do
+            fake_consolidator = double
+            expect(fake_consolidator).to receive(:run)
+            expect(Dotenvious::CLI::EnvFileConsolidator).to receive(:new)
+              .with({example_file: '.my-test-file-env'})
+              .and_return(fake_consolidator)
+
+            described_class.new.run
+          end
+        end
       end
     end
   end
