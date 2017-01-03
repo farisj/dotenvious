@@ -14,7 +14,7 @@ module Dotenvious
         #took from Dotenv source code whoops
         if file_missing?
           puts "This repo does not have an #{filename} file"
-          return
+          return {}
         end
         Hash.new.tap do |environment|
           file.each do |line|
