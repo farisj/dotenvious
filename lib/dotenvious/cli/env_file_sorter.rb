@@ -4,8 +4,6 @@ module Dotenvious
   module CLI
     class EnvFileSorter
       def run
-        Loaders::Env.new.load
-        puts "Sorting..."
         File.open('.env', 'w') do |file|
           file.write(sorted_env_text)
         end
