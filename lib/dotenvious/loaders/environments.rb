@@ -10,12 +10,8 @@ module Dotenvious
 
       def load_environments
         ENV.merge!(DotenvFile.load_from('.env'))
-        example_env = if example_file.match(/\.ya?ml/)
-          YamlFile.load_from(example_file)
-        else
-          DotenvFile.load_from(example_file)
-        end
-        ENV_EXAMPLE.merge!(example_env)
+        environment_loader = example_file.match(/\.ya?ml/) ? YamlFile : DotenvFile
+        ENV_EXAMPLE.merge!(environment_loader.load_from(example_file))
       end
 
       private
