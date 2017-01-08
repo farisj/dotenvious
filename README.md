@@ -39,25 +39,40 @@ First, add a `.envious` file to the root of your project. In the file, you can s
 Dotenvious::Configuration.new do |config|
 
 	config.custom_variables = %w(VARIABLES WITH DIFFERENT VALUES)
-	
+
 	config.optional_variables = %w(VARIABLES YOU DONT NEED)
 
 end
 
-``` 
+```
 
 These both need to be arrays.
 
 `dotenvious` will ignore the variables specified.
 
-### Sorting
+### Additional Options
+
+#### --sort
 
 Running `dotenvious --sort` will sort your `.env` file alphabetically.
 
+#### --file
+
+To select another example enironment file to use, add the optional flag `--file .env-example` or whatever your filename is.
+
+This gem also works with `.yml` or `.yaml` files designed for CircleCI. To use a `.yaml` file of this style, it must have the format:
+
+```
+machine:
+	environment:
+		MY_ENV_VAR_1: "asdfghjk"
+		MY_ENV_VAR_2: "qwertyu"
+		...
+```
+
+Other configuration formats can be added in the future.
+
 ## Future Work
-
-
-- [ ] Ability to choose which development `.env-*` file to load from
 
 - [ ] Persist user's individual choices in a `.envious` file in directory after run
 
