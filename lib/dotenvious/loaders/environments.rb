@@ -1,4 +1,5 @@
 require_relative 'dotenv_file'
+require_relative 'yaml_file'
 
 module Dotenvious
   module Loaders
@@ -9,7 +10,8 @@ module Dotenvious
 
       def load_environments
         ENV.merge!(DotenvFile.load_from('.env'))
-        ENV_EXAMPLE.merge!(DotenvFile.load_from(example_file))
+        environment_loader = example_file.match(/\.ya?ml/) ? YamlFile : DotenvFile
+        ENV_EXAMPLE.merge!(environment_loader.load_from(example_file))
       end
 
       private

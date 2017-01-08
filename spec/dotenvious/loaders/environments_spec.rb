@@ -24,6 +24,22 @@ describe Dotenvious::Loaders::Environments do
 
         described_class.new({example_file: '.my.example.file'}).load_environments
       end
+
+      context 'which is a yml/yaml' do
+        it 'loads the yml correctly' do
+          expect(Dotenvious::Loaders::DotenvFile).to receive(:load_from).with('.env').and_return({})
+          expect(Dotenvious::Loaders::YamlFile).to receive(:load_from).with('example.yml').and_return({})
+
+          described_class.new({example_file: 'example.yml'}).load_environments
+        end
+
+        it 'also loads yaml files' do
+          expect(Dotenvious::Loaders::DotenvFile).to receive(:load_from).with('.env').and_return({})
+          expect(Dotenvious::Loaders::YamlFile).to receive(:load_from).with('example.yaml').and_return({})
+
+          described_class.new({example_file: 'example.yaml'}).load_environments
+        end
+      end
     end
   end
 end
