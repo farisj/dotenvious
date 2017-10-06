@@ -11,7 +11,7 @@ module Dotenvious
 
       def run
         parse_options
-        EnvFileConsolidator.new({example_file: options[:file]}).run
+        EnvFileConsolidator.new({example_file: options[:example_file]}).run
         EnvFileSorter.new.run if options[:sort]
       end
 
@@ -23,8 +23,8 @@ module Dotenvious
         parser = OptionParser.new do |opts|
           opts.banner = "How to use Dotenvious:"
 
-          opts.on('-f .example-environment-file', '--file .example-environment-file', 'Specify which example file to use') do |file|
-            options[:file] = file
+          opts.on('-x .example-env-file', '--example .example-env-file', 'Specify which example file to use') do |file|
+            options[:example_file] = file
           end
 
           opts.on('-s', '--sort', 'Sort .env file by key names alphabetically') do

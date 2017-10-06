@@ -41,9 +41,9 @@ describe Dotenvious::CLI::Main do
           end
         end
 
-        context '--file' do
+        context '--example' do
           before do
-            stub_const('ARGV', ['--file', '.my-test-file-env'])
+            stub_const('ARGV', ['--example', '.my-test-file-env'])
           end
 
           it 'uses the user-specified filename to read example environment' do
