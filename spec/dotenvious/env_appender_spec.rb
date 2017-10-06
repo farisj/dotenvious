@@ -10,10 +10,10 @@ describe Dotenvious::EnvAppender do
       env_double = double('File', write: nil)
       expect(env_double).to receive(:write).with("test2=example2\n")
       expect(File).to receive(:open).
-        with('.env', 'a+').once.
+        with('.big-ol-env', 'a+').once.
         and_return(env_double)
 
-      described_class.new.append('test2')
+      described_class.new('.big-ol-env').append('test2')
     end
   end
 end

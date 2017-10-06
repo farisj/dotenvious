@@ -11,13 +11,21 @@ module Dotenvious
 
       def run
         parse_options
-        EnvFileConsolidator.new({example_file: options[:example_file]}).run
-        EnvFileSorter.new.run if options[:sort]
+        EnvFileConsolidator.new(file_options).run
+        EnvFileSorter.new(options[:env_file]).run if options[:sort]
       end
 
       private
 
       attr_accessor :options
+      attr_reader :file_options
+
+      def file_options
+        @file_options ||= Hash.new.tap do |hash|
+          hash[:example_file] = options[:example_file] if options.key?(:example_file)
+          hash[:env_file] = options[:env_file] if options.key?(:env_file)
+        end
+      end
 
       def parse_options
         parser = OptionParser.new do |opts|
@@ -27,7 +35,11 @@ module Dotenvious
             options[:example_file] = file
           end
 
-          opts.on('-s', '--sort', 'Sort .env file by key names alphabetically') do
+          opts.on('-f .env-file', '--file .env-file', 'Specify which file to write to') do |file|
+            options[:env_file] = file
+          end
+
+          opts.on('-s', '--sort', 'Sort env file by key names alphabetically') do
             options[:sort] = true
           end
 

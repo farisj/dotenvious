@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Dotenvious::CLI::EnvFileConsolidator do
   describe '.new' do
     it 'takes option hash' do
-      expect { described_class.new({example_file: '.envenvenv'}) }.to_not raise_error
+      expect { described_class.new({example_file: '.envenvenv', env_file: '.env'}) }.to_not raise_error
     end
   end
 
@@ -23,9 +23,11 @@ describe Dotenvious::CLI::EnvFileConsolidator do
         context 'and the user wants to append them' do
           it 'begins the Prompter' do
             io_object = double
+            prompter = double
             expect(STDIN).to receive(:gets).and_return('y')
             expect_any_instance_of(described_class).to receive(:all_vars_present?).and_return false
-            expect(Dotenvious::Prompter).to receive(:run)#.and_return false
+            expect(Dotenvious::Prompter).to receive(:new).and_return prompter
+            expect(prompter).to receive(:run)
             described_class.new.run
           end
         end
@@ -56,7 +58,7 @@ describe Dotenvious::CLI::EnvFileConsolidator do
       it 'loads environments with that example_file' do
         environments_double = double
         expect(Dotenvious::Loaders::Environments).to receive(:new)
-          .with({example_file: '.test.env.test'}).and_return(environments_double)
+          .with({example_file: '.test.env.test', env_file: '.env'}).and_return(environments_double)
         expect(environments_double).to receive(:load_environments)
 
         described_class.new({example_file: '.test.env.test'}).run

@@ -6,23 +6,24 @@ require_relative '../loaders/configuration'
 module Dotenvious
   module CLI
     class EnvFileConsolidator
-      def initialize(options = {})
-        @example_file = options[:example_file]
+      def initialize(example_file: DEFAULT_EXAMPLE_ENV_FILE, env_file: DEFAULT_ENV_FILE)
+        @example_file = example_file
+        @env_file = env_file
       end
 
       def run
         Loaders::Configuration.new.load
-        Loaders::Environments.new({example_file: example_file}).load_environments
+        Loaders::Environments.new({example_file: example_file, env_file: env_file}).load_environments
         unless all_vars_present? && all_vars_match?
           alert_user
           decision = STDIN.gets.strip
-          Prompter.run if decision.downcase == 'y'
+          Prompter.new(env_file).run if decision.downcase == 'y'
         end
       end
 
       private
 
-      attr_reader :example_file, :filename
+      attr_reader :example_file, :env_file, :filename
 
       def alert_user
         puts "You have missing ENV variables. Examime them? [y/n]"

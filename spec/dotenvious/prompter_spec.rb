@@ -11,7 +11,7 @@ describe Dotenvious::Prompter do
     it 'prompts the user to add every missing or mismatched variable do' do
       expect(STDIN).to receive(:gets).twice.and_return('n')
 
-      described_class.run
+      described_class.new.run
     end
 
     it 'appends the vars to .env' do
@@ -20,13 +20,13 @@ describe Dotenvious::Prompter do
         with('.env', 'a+').once.
         and_return(double('File', write: nil))
 
-      described_class.run
+      described_class.new.run
     end
 
     it 'quits out if the user presses q' do
       expect(STDIN).to receive(:gets).once.and_return('q')
 
-      described_class.run
+      described_class.new.run
     end
   end
 end
