@@ -1,5 +1,9 @@
 module Dotenvious
   class ValueReplacer
+    def initialize(filename)
+      @filename = filename
+    end
+
     def replace(key)
       line_number = base_env.find_index do |line|
         line.match(/^#{key}=/)
@@ -11,14 +15,14 @@ module Dotenvious
 
     private
 
-    attr_reader :base_env
+    attr_reader :base_env, :filename
 
     def base_env
-      @base_env ||= File.read('.env').split("\n")
+      @base_env ||= File.read(filename).split("\n")
     end
 
     def env_writer
-      File.open('.env', 'w')
+      File.open(filename, 'w')
     end
   end
 end
