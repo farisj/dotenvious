@@ -12,7 +12,7 @@ Dotenvious eliminates the pain of manually parsing through a newly changed `.exa
 
 Add the gem to your Gemfile by the following:
 
-```
+```ruby
  group :development do
 	gem 'dotenvious'
 end
@@ -21,7 +21,7 @@ end
 
 then run:
 
-```
+```bash
 bundle install
 bundle exec dotenvious
 ```
@@ -35,7 +35,7 @@ Currently, one can whitelist which variables they want to exclude from examinati
 
 First, add a `.envious` file to the root of your project. In the file, you can specify which variables to ignore fully (`optional_variables`) or those that you need but are expected to have different values from those provided in `.example-env` (`custom_variables`).
 
-```
+```ruby
 Dotenvious::Configuration.new do |config|
 
 	config.custom_variables = %w(VARIABLES WITH DIFFERENT VALUES)
@@ -56,18 +56,25 @@ These both need to be arrays.
 
 Running `dotenvious --sort` will sort your `.env` file alphabetically.
 
-#### --file
+#### -f / --file
 
-To select another example enironment file to use, add the optional flag `--file .env-example` or whatever your filename is.
+For repositories that don't use a `.env` but rather a `.env.development` or other alternative env file, use the `--file` flag to declare what file to write to.
+
+
+#### -x / --example
+
+To select another example enironment file to use, add the optional flag `--example .env-example` or whatever your filename is.
+
+
 
 This gem also works with `.yml` or `.yaml` files designed for CircleCI. To use a `.yaml` file of this style, it must have the format:
 
-```
+```yml
 machine:
-	environment:
-		MY_ENV_VAR_1: "asdfghjk"
-		MY_ENV_VAR_2: "qwertyu"
-		...
+  environment:
+    MY_ENV_VAR_1: "asdfghjk"
+    MY_ENV_VAR_2: "qwertyu"
+    ...
 ```
 
 Other configuration formats can be added in the future.
