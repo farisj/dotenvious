@@ -16,9 +16,13 @@ describe Dotenvious::Prompter do
 
     it 'appends the vars to .env' do
       expect(STDIN).to receive(:gets).twice.and_return('y','n')
+      file_double = double
+      expect(file_double).to receive(:write).with("test2=\n")
+      expect(file_double).to receive(:close)
+
       expect(File).to receive(:open).
         with('.env', 'a+').once.
-        and_return(double('File', write: nil))
+        and_return(file_double)
 
       described_class.new.run
     end
@@ -27,6 +31,9 @@ describe Dotenvious::Prompter do
       expect(STDIN).to receive(:gets).once.and_return('q')
 
       described_class.new.run
+    end
+
+    xit 'given missing and different args, appends/rewrites correctly into env' do
     end
   end
 end

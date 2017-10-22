@@ -6,6 +6,7 @@ module Dotenvious
 
     def append(key)
       env.write("#{key}=#{ENV_EXAMPLE[key]}\n")
+      env.close
     end
 
     private
