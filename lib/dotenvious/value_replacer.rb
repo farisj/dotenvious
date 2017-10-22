@@ -10,7 +10,7 @@ module Dotenvious
       end
       updated_env = base_env.dup
       updated_env[line_number] = "#{key}=#{ENV_EXAMPLE[key]}"
-      env_writer.write(updated_env.join("\n"))
+      env_writer.write(updated_env.join("\n") + "\n")
     end
 
     private
