@@ -11,6 +11,7 @@ module Dotenvious
       updated_env = base_env.dup
       updated_env[line_number] = "#{key}=#{ENV_EXAMPLE[key]}"
       env_writer.write(updated_env.join("\n") + "\n")
+      env_writer.close
     end
 
     private
@@ -22,7 +23,7 @@ module Dotenvious
     end
 
     def env_writer
-      File.open(filename, 'w')
+      @env_writer ||= File.open(filename, 'w')
     end
   end
 end

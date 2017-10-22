@@ -9,6 +9,7 @@ describe Dotenvious::EnvAppender do
     it 'appends the value to the end of the .env file' do
       env_double = double('File', write: nil)
       expect(env_double).to receive(:write).with("test2=example2\n")
+      expect(env_double).to receive(:close)
       expect(File).to receive(:open).
         with('.big-ol-env', 'a+').once.
         and_return(env_double)

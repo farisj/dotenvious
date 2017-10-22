@@ -14,6 +14,7 @@ describe Dotenvious::ValueReplacer do
 
         env_double = double('File', write: nil)
         expect(env_double).to receive(:write).with("test=1234\nfake=correct\n")
+        expect(env_double).to receive(:close)
 
         expect(File).to receive(:open).
           with('.big-ol-env', 'w').
